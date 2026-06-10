@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 const education = [
   {
     degree: 'B.Com',
-    institution: 'Delhi University, Delhi',
+    institution: 'IGNOU Delhi  ',
     status: 'Pursuing',
     year: '2023 – Present',
     icon: '🎓',
@@ -28,7 +28,7 @@ const education = [
   },
   {
     degree: '10th',
-    institution: 'DPS Gopalganj, Bihar',
+    institution: 'APS Gopalganj, Bihar',
     status: 'Completed',
     year: '2018 – 2020',
     icon: '🏫',
