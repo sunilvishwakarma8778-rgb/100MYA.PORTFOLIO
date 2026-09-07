@@ -1,21 +1,21 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from "react";
 
 export default function Hero() {
-  const canvasRef = useRef(null)
+  const canvasRef = useRef(null);
 
   // Particle background
   useEffect(() => {
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
-    let w = canvas.width = window.innerWidth
-    let h = canvas.height = window.innerHeight
-    let particles = []
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    let w = (canvas.width = window.innerWidth);
+    let h = (canvas.height = window.innerHeight);
+    let particles = [];
 
     const resize = () => {
-      w = canvas.width = window.innerWidth
-      h = canvas.height = window.innerHeight
-    }
-    window.addEventListener('resize', resize)
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", resize);
 
     for (let i = 0; i < 70; i++) {
       particles.push({
@@ -25,30 +25,30 @@ export default function Hero() {
         dx: (Math.random() - 0.5) * 0.4,
         dy: (Math.random() - 0.5) * 0.4,
         alpha: Math.random() * 0.5 + 0.1,
-      })
+      });
     }
 
-    let raf
+    let raf;
     const draw = () => {
-      ctx.clearRect(0, 0, w, h)
-      particles.forEach(p => {
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(245,166,35,${p.alpha})`
-        ctx.fill()
-        p.x += p.dx
-        p.y += p.dy
-        if (p.x < 0 || p.x > w) p.dx *= -1
-        if (p.y < 0 || p.y > h) p.dy *= -1
-      })
-      raf = requestAnimationFrame(draw)
-    }
-    draw()
+      ctx.clearRect(0, 0, w, h);
+      particles.forEach((p) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(245,166,35,${p.alpha})`;
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > w) p.dx *= -1;
+        if (p.y < 0 || p.y > h) p.dy *= -1;
+      });
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
     return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
 
   return (
     <>
@@ -182,6 +182,14 @@ export default function Hero() {
           width: 340px;
           height: 420px;
         }
+
+        .hero-profile-clip {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          border-radius: 200px 200px 160px 160px;
+          z-index: 1;
+        }
         .hero-avatar-bg {
           position: absolute;
           inset: 0;
@@ -195,20 +203,18 @@ export default function Hero() {
           border-radius: 210px 210px 170px 170px;
           border: 1px dashed rgba(245,166,35,0.2);
           animation: spin-slow 30s linear infinite;
+          z-index: 2;
         }
-        .hero-initials {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: 'Playfair Display', serif;
-          font-size: 7rem;
-          font-weight: 900;
-          color: rgba(245,166,35,0.12);
-          letter-spacing: -0.04em;
-          user-select: none;
-        }
+.hero-profile-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 200px 200px 160px 160px;
+  z-index: 1;
+}
         .hero-badge {
           position: absolute;
           bottom: 30px;
@@ -224,6 +230,7 @@ export default function Hero() {
           text-align: center;
           animation: float 3s ease-in-out infinite;
           box-shadow: 0 8px 24px rgba(245,166,35,0.3);
+          z-index: 3;
         }
         .hero-badge-num {
           display: block;
@@ -238,6 +245,7 @@ export default function Hero() {
           display: flex;
           flex-direction: column;
           gap: 8px;
+          z-index: 3;
         }
         .hero-tool-pill {
           background: #1A2045;
@@ -294,24 +302,38 @@ export default function Hero() {
           <div className="hero-left">
             <div className="hero-eyebrow">Available for freelance work</div>
             <h1 className="hero-name">
-              Saumya<br /><span className="gold">Singh</span>
+              Saumya
+              <br />
+              <span className="gold">Singh</span>
             </h1>
-            <div className="hero-role">Graphic Designer &amp; Visual Creator</div>
+            <div className="hero-role">
+              Graphic Designer &amp; Visual Creator
+            </div>
             <p className="hero-desc">
-              Crafting <strong>visual identities, brand stories</strong>, and digital creatives 
-              that make people stop scrolling. Skilled in the full Adobe suite, Figma, 
-              and motion graphics.
+              Crafting <strong>visual identities, brand stories</strong>, and
+              digital creatives that make people stop scrolling. Skilled in the
+              full Adobe suite, Figma, and motion graphics.
             </p>
             <div className="hero-btns">
-              <a href="#projects" className="btn-primary">View My Work</a>
-              <a href="#contact" className="btn-outline">Let's Connect</a>
+              <a href="#projects" className="btn-primary">
+                View My Work
+              </a>
+              <a href="#contact" className="btn-outline">
+                Let's Connect
+              </a>
             </div>
           </div>
           <div className="hero-right">
             <div className="hero-avatar-wrap">
               <div className="hero-avatar-bg" />
               <div className="hero-avatar-ring" />
-              <div className="hero-initials">SS</div>
+              <div className="hero-profile-clip">
+                <img
+                  src="/public/saumya-profile.png"
+                  alt="Saumya Singh"
+                  className="hero-profile-image"
+                />
+              </div>
               <div className="hero-tools">
                 <div className="hero-tool-pill">🎨 Photoshop</div>
                 <div className="hero-tool-pill">✏️ Illustrator</div>
@@ -330,5 +352,5 @@ export default function Hero() {
         </div>
       </section>
     </>
-  )
+  );
 }

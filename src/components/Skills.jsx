@@ -1,65 +1,34 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 
 const skills = [
-  { name: 'Adobe Photoshop', level: 90, color: '#31A8FF', icon: 'Ps' },
-  { name: 'Adobe Illustrator', level: 85, color: '#FF9A00', icon: 'Ai' },
-  { name: 'Adobe After Effects', level: 78, color: '#9999FF', icon: 'Ae' },
-  { name: 'Figma', level: 82, color: '#F24E1E', icon: 'Fi' },
-  { name: 'Adobe Animate', level: 70, color: '#FF0000', icon: 'An' },
-  { name: 'Adobe Premiere Pro', level: 75, color: '#9999FF', icon: 'Pr' },
+  { name: 'Adobe Photoshop', color: '#31A8FF', icon: 'Ps' },
+  { name: 'Adobe Illustrator', color: '#FF9A00', icon: 'Ai' },
+  { name: 'Adobe After Effects', color: '#9999FF', icon: 'Ae' },
+  { name: 'Figma', color: '#F24E1E', icon: 'Fi' },
+  { name: 'Adobe Animate', color: '#FF0000', icon: 'An' },
+  { name: 'Adobe Premiere Pro', color: '#9999FF', icon: 'Pr' },
 ]
 
-function SkillBar({ skill, visible }) {
+function SkillRow({ skill }) {
   return (
     <div style={{ marginBottom: 24 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{
-            width: 36, height: 36, borderRadius: 8,
-            background: skill.color + '22',
-            border: `1px solid ${skill.color}44`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: "'Space Mono', monospace",
-            fontSize: '0.65rem', fontWeight: 700,
-            color: skill.color,
-          }}>{skill.icon}</div>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', color: '#F0EEE8' }}>{skill.name}</span>
-        </div>
-        <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '0.72rem', color: '#F5A623' }}>
-          {skill.level}%
-        </span>
-      </div>
-      <div style={{
-        height: 6, borderRadius: 999,
-        background: 'rgba(255,255,255,0.06)',
-        overflow: 'hidden',
-      }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <div style={{
-          height: '100%',
-          width: visible ? `${skill.level}%` : '0%',
-          background: `linear-gradient(90deg, ${skill.color}, ${skill.color}88)`,
-          borderRadius: 999,
-          transition: 'width 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
-          transitionDelay: '0.2s',
-          boxShadow: `0 0 12px ${skill.color}66`,
-        }} />
+          width: 36, height: 36, borderRadius: 8,
+          background: skill.color + '22',
+          border: `1px solid ${skill.color}44`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontFamily: "'Space Mono', monospace",
+          fontSize: '0.65rem', fontWeight: 700,
+          color: skill.color,
+        }}>{skill.icon}</div>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', color: '#F0EEE8' }}>{skill.name}</span>
       </div>
     </div>
   )
 }
 
 export default function Skills() {
-  const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setVisible(true); obs.disconnect() }
-    }, { threshold: 0.2 })
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
-  }, [])
-
   return (
     <>
       <style>{`
@@ -110,7 +79,7 @@ export default function Skills() {
           .skills-intro { position: static; }
         }
       `}</style>
-      <section className="section skills-bg" id="skills" ref={ref}>
+      <section className="section skills-bg" id="skills">
         <div className="container">
           <div className="section-label">Expertise</div>
           <h2 className="section-title">My Skills</h2>
@@ -133,7 +102,7 @@ export default function Skills() {
             </div>
             <div>
               {skills.map(skill => (
-                <SkillBar key={skill.name} skill={skill} visible={visible} />
+                <SkillRow key={skill.name} skill={skill} />
               ))}
             </div>
           </div>

@@ -53,10 +53,10 @@ export default function Footer() {
       `}</style>
       <footer className="footer">
         <div className="footer-inner">
-          <a href="#hero" className="footer-logo">S<span>.</span>Singh</a>
-          <div className="footer-copy">
+          <a href="#hero" className="footer-logo">Saumya<span>.</span>Singh</a>
+          {/* <div className="footer-copy">
             © 2024 Saumya Singh. Crafted with <span>♥</span> and lots of Photoshop.
-          </div>
+          </div> */}
           <div className="footer-portfolio">
             <div className="footer-dot" />
             Portfolio available on request

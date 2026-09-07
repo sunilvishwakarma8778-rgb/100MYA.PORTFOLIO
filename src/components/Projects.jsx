@@ -3,44 +3,45 @@ import React, { useEffect, useRef, useState } from 'react'
 const projects = [
   {
     num: '01',
-    title: 'Social Media Design',
-    desc: 'Designed scroll-stopping social media posts, posters, and creative advertisements for brands across platforms.',
-    tags: ['Photoshop', 'Illustrator', 'Canva'],
+    title: 'See All My Works',
+    desc: 'Explore my creative projects and design work.',
+    tags: ['Photoshop', 'Illustrator', 'Canva', 'Figma', 'After Effects', 'Premiere Pro'],
     icon: '📱',
     color: '#31A8FF',
+    link: 'https://drive.google.com/drive/folders/1WgdTm5-aV17Ff87Y8l8PU-iTDcXsRILE?usp=sharing',
   },
-  {
-    num: '02',
-    title: 'Logo & Brand Identity',
-    desc: 'Created comprehensive logo concepts and branding systems — from initial sketches to final brand guidelines.',
-    tags: ['Illustrator', 'Figma', 'Branding'],
-    icon: '✏️',
-    color: '#F5A623',
-  },
-  {
-    num: '03',
-    title: 'Print & Promotional Design',
-    desc: 'Developed brochures, flyers, and promotional materials with a strong focus on hierarchy and print-ready layouts.',
-    tags: ['Photoshop', 'InDesign', 'Print'],
-    icon: '🖨️',
-    color: '#4CAF50',
-  },
-  {
-    num: '04',
-    title: 'Motion Graphics',
-    desc: 'Brought brands to life through animated intros, kinetic typography, and dynamic motion graphics sequences.',
-    tags: ['After Effects', 'Adobe Animate'],
-    icon: '🎬',
-    color: '#9999FF',
-  },
-  {
-    num: '05',
-    title: 'Video Content Creation',
-    desc: 'Edited and produced polished video content with professional cuts, color grading, and sound design.',
-    tags: ['Premiere Pro', 'After Effects'],
-    icon: '🎥',
-    color: '#E040FB',
-  },
+  // {
+  //   num: '02',
+  //   title: 'Logo & Brand Identity',
+  //   desc: 'Created comprehensive logo concepts and branding systems — from initial sketches to final brand guidelines.',
+  //   tags: ['Illustrator', 'Figma', 'Branding'],
+  //   icon: '✏️',
+  //   color: '#F5A623',
+  // },
+  // {
+  //   num: '03',
+  //   title: 'Print & Promotional Design',
+  //   desc: 'Developed brochures, flyers, and promotional materials with a strong focus on hierarchy and print-ready layouts.',
+  //   tags: ['Photoshop', 'InDesign', 'Print'],
+  //   icon: '🖨️',
+  //   color: '#4CAF50',
+  // },
+  // {
+  //   num: '04',
+  //   title: 'Motion Graphics',
+  //   desc: 'Brought brands to life through animated intros, kinetic typography, and dynamic motion graphics sequences.',
+  //   tags: ['After Effects', 'Adobe Animate'],
+  //   icon: '🎬',
+  //   color: '#9999FF',
+  // },
+  // {
+  //   num: '05',
+  //   title: 'Video Content Creation',
+  //   desc: 'Edited and produced polished video content with professional cuts, color grading, and sound design.',
+  //   tags: ['Premiere Pro', 'After Effects'],
+  //   icon: '🎥',
+  //   color: '#E040FB',
+  // },
 ]
 
 export default function Projects() {
@@ -49,9 +50,14 @@ export default function Projects() {
 
   useEffect(() => {
     const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setVisible(true); obs.disconnect() }
+      if (e.isIntersecting) {
+        setVisible(true)
+        obs.disconnect()
+      }
     }, { threshold: 0.1 })
+
     if (ref.current) obs.observe(ref.current)
+
     return () => obs.disconnect()
   }, [])
 
@@ -63,6 +69,7 @@ export default function Projects() {
           flex-direction: column;
           gap: 0;
         }
+
         .project-row {
           display: grid;
           grid-template-columns: 80px 1fr auto;
@@ -73,42 +80,56 @@ export default function Projects() {
           transition: all 0.3s ease;
           opacity: 0;
           transform: translateY(24px);
-          cursor: default;
+          cursor: pointer;
+          text-decoration: none;
+          color: inherit;
         }
+
         .project-row.show {
           opacity: 1;
           transform: translateY(0);
         }
+
         .project-row:hover .project-icon-wrap {
           background: rgba(245,166,35,0.15);
           border-color: #F5A623;
           transform: scale(1.08);
         }
+
         .project-row:hover .project-title {
           color: #F5A623;
         }
+
         .project-num-col {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 8px;
         }
+
         .project-num {
           font-family: 'Space Mono', monospace;
           font-size: 0.7rem;
           color: rgba(245,166,35,0.5);
           letter-spacing: 0.1em;
         }
+
         .project-icon-wrap {
-          width: 52px; height: 52px;
+          width: 52px;
+          height: 52px;
           border-radius: 12px;
           background: var(--navy-light);
           border: 1px solid var(--border);
-          display: flex; align-items: center; justify-content: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           font-size: 1.4rem;
           transition: all 0.3s ease;
         }
-        .project-body { }
+
+        .project-body {
+        }
+
         .project-title {
           font-family: 'Playfair Display', serif;
           font-size: 1.35rem;
@@ -116,6 +137,7 @@ export default function Projects() {
           margin-bottom: 8px;
           transition: color 0.2s;
         }
+
         .project-desc {
           color: var(--muted);
           font-size: 0.9rem;
@@ -123,51 +145,81 @@ export default function Projects() {
           margin-bottom: 12px;
           max-width: 500px;
         }
-        .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .project-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+
         .project-arrow {
           color: rgba(245,166,35,0.3);
           font-size: 1.5rem;
           align-self: center;
           transition: color 0.2s, transform 0.2s;
         }
+
         .project-row:hover .project-arrow {
           color: #F5A623;
           transform: translateX(4px);
         }
+
         @media (max-width: 600px) {
           .project-row {
             grid-template-columns: 56px 1fr;
           }
-          .project-arrow { display: none; }
+
+          .project-arrow {
+            display: none;
+          }
         }
       `}</style>
+
       <section className="section" id="projects" ref={ref}>
         <div className="container">
           <div className="section-label">Portfolio</div>
           <h2 className="section-title">Projects &amp; Work</h2>
           <div className="accent-line" />
+
           <div className="projects-list">
             {projects.map((p, i) => (
-              <div
+              <a
                 key={p.num}
+                href={p.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`project-row${visible ? ' show' : ''}`}
                 style={{ transitionDelay: visible ? `${i * 0.1}s` : '0s' }}
               >
                 <div className="project-num-col">
                   <span className="project-num">{p.num}</span>
-                  <div className="project-icon-wrap" style={{ borderColor: p.color + '44' }}>
+
+                  <div
+                    className="project-icon-wrap"
+                    style={{ borderColor: p.color + '44' }}
+                  >
                     {p.icon}
                   </div>
                 </div>
+
                 <div className="project-body">
                   <h3 className="project-title">{p.title}</h3>
-                  <p className="project-desc">{p.desc}</p>
+
+                  <p className="project-desc">
+                    {p.desc}
+                  </p>
+
                   <div className="project-tags">
-                    {p.tags.map(t => <span className="tag" key={t}>{t}</span>)}
+                    {p.tags.map(t => (
+                      <span className="tag" key={t}>
+                        {t}
+                      </span>
+                    ))}
                   </div>
                 </div>
+
                 <div className="project-arrow">→</div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

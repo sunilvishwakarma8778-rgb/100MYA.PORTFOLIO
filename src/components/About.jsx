@@ -1,16 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from "react";
 
 export default function About() {
-  const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setVisible(true); obs.disconnect() }
-    }, { threshold: 0.15 })
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
-  }, [])
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <>
@@ -40,13 +46,12 @@ export default function About() {
           background: linear-gradient(90deg, #F5A623, transparent);
         }
         .about-monogram {
-          font-family: 'Playfair Display', serif;
-          font-size: 6rem;
-          font-weight: 900;
-          color: rgba(245,166,35,0.1);
-          line-height: 1;
+          display: block;
+          width: 100%;
+          height: clamp(260px, 32vw, 420px);
+          object-fit: cover;
+          border-radius: 14px;
           margin-bottom: 24px;
-          letter-spacing: -0.04em;
         }
         .about-quote {
           font-family: 'Playfair Display', serif;
@@ -119,18 +124,28 @@ export default function About() {
       `}</style>
       <section className="section" id="about" ref={ref}>
         <div className="container">
-          <div style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.7s ease' }}>
+          <div
+            style={{
+              opacity: visible ? 1 : 0,
+              transition: "opacity 0.7s ease",
+            }}
+          >
             <div className="section-label">Who I Am</div>
             <h2 className="section-title">About Me</h2>
             <div className="accent-line" />
             <div className="about-grid">
               <div className="about-visual">
                 <div className="about-card-main">
-                  <div className="about-monogram">SS</div>
+                  {/* <img
+                    className="about-monogram"
+                    src="/public/s."
+                    alt="Saumya Singh"
+                  /> */}
                   <p className="about-quote">
-                    Design is not just what it looks like — design is how it works.
+                    Design is not just what it looks like — design is how it
+                    works.
                   </p>
-                  <div className="about-location">Gopalganj, Bihar &amp; Delhi</div>
+                  <div className="about-location">Gopalganj, Bihar </div>
                   <div className="about-stats">
                     <div className="stat-box">
                       <span className="stat-num">6+</span>
@@ -153,24 +168,44 @@ export default function About() {
               </div>
               <div className="about-text">
                 <p>
-                  Hi! I'm <strong>Saumya Singh</strong>, a creative and detail-oriented 
-                  <strong> Graphic Designer</strong> based in Delhi, pursuing B.Com from DU 
-                  while building my design career.
+                  Hi! I'm <strong>Saumya Singh</strong>, a creative and
+                  detail-oriented
+                  <strong> Graphic Designer</strong> based in Delhi, pursuing
+                  B.Com from IGNOU while building my design career.
                 </p>
                 <p>
-                  I specialize in crafting <strong>visual identities, social media graphics, 
-                  branding, and motion graphics</strong>. My toolkit includes the full Adobe 
-                  Creative Suite and Figma — tools I've mastered through my 
-                  <strong> DGWA Plus certification from MAAC, Gorakhpur</strong>.
+                  I specialize in crafting{" "}
+                  <strong>
+                    visual identities, social media graphics, branding, and
+                    motion graphics
+                  </strong>
+                  . My toolkit includes the full Adobe Creative Suite and Figma
+                  — tools I've mastered through my
+                  <strong>
+                    {" "}
+                    Diploma in Graphics, Web and Animation (DGWA Plus)
+                    certification from MAAC, Gorakhpur
+                  </strong>
+                  .
                 </p>
                 <p>
-                  I'm passionate about transforming ideas into compelling visuals — whether 
-                  it's a logo that tells a story, a poster that stops the scroll, or a 
-                  motion graphic that brings a brand to life.
+                  I'm passionate about transforming ideas into compelling
+                  visuals — whether it's a logo that tells a story, a poster
+                  that stops the scroll, or a motion graphic that brings a brand
+                  to life.
                 </p>
                 <div className="about-pills">
-                  {['Branding', 'Social Media Design', 'Motion Graphics', 'Digital Creatives', 'Logo Design', 'Video Editing'].map(t => (
-                    <span className="tag" key={t}>{t}</span>
+                  {[
+                    "Branding",
+                    "Social Media Design",
+                    "Motion Graphics",
+                    "Digital Creatives",
+                    "Logo Design",
+                    "Video Editing",
+                  ].map((t) => (
+                    <span className="tag" key={t}>
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -179,5 +214,5 @@ export default function About() {
         </div>
       </section>
     </>
-  )
+  );
 }
