@@ -329,7 +329,7 @@ export default function Hero() {
               <div className="hero-avatar-ring" />
               <div className="hero-profile-clip">
                 <img
-                  src="/public/saumya-profile.png"
+                  src="/saumya-profile.png"
                   alt="Saumya Singh"
                   className="hero-profile-image"
                 />
