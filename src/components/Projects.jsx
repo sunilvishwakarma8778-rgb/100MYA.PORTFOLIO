@@ -1,14 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from "react";
 
 const projects = [
   {
-    num: '01',
-    title: 'See All My Works',
-    desc: 'Explore my creative projects and design work.',
-    tags: ['Photoshop', 'Illustrator', 'Canva', 'Figma', 'After Effects', 'Premiere Pro'],
-    icon: '📱',
-    color: '#31A8FF',
-    link: 'https://drive.google.com/drive/folders/1WgdTm5-aV17Ff87Y8l8PU-iTDcXsRILE?usp=sharing',
+    num: "01",
+    title: "See All My Works",
+    desc: "Explore my creative projects and design work.",
+    tags: [
+      "Photoshop",
+      "Illustrator",
+      "Canva",
+      "Figma",
+      "After Effects",
+      "Premiere Pro",
+    ],
+    icon: "📱",
+    color: "#31A8FF",
+    link: "https://drive.google.com/drive/folders/1WgdTm5-aV17Ff87Y8l8PU-iTDcXsRILE?usp=sharing",
   },
   // {
   //   num: '02',
@@ -42,24 +49,27 @@ const projects = [
   //   icon: '🎥',
   //   color: '#E040FB',
   // },
-]
+];
 
 export default function Projects() {
-  const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        setVisible(true)
-        obs.disconnect()
-      }
-    }, { threshold: 0.1 })
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.1 },
+    );
 
-    if (ref.current) obs.observe(ref.current)
+    if (ref.current) obs.observe(ref.current);
 
-    return () => obs.disconnect()
-  }, [])
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <>
@@ -150,7 +160,13 @@ export default function Projects() {
           display: flex;
           flex-wrap: wrap;
           gap: 6px;
+          
         }
+
+.tag {
+  font-size: 0.9rem;
+  padding: 10px 18px;
+}        
 
         .project-arrow {
           color: rgba(245,166,35,0.3);
@@ -188,15 +204,15 @@ export default function Projects() {
                 href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`project-row${visible ? ' show' : ''}`}
-                style={{ transitionDelay: visible ? `${i * 0.1}s` : '0s' }}
+                className={`project-row${visible ? " show" : ""}`}
+                style={{ transitionDelay: visible ? `${i * 0.1}s` : "0s" }}
               >
                 <div className="project-num-col">
                   <span className="project-num">{p.num}</span>
 
                   <div
                     className="project-icon-wrap"
-                    style={{ borderColor: p.color + '44' }}
+                    style={{ borderColor: p.color + "44" }}
                   >
                     {p.icon}
                   </div>
@@ -205,12 +221,10 @@ export default function Projects() {
                 <div className="project-body">
                   <h3 className="project-title">{p.title}</h3>
 
-                  <p className="project-desc">
-                    {p.desc}
-                  </p>
+                  <p className="project-desc">{p.desc}</p>
 
                   <div className="project-tags">
-                    {p.tags.map(t => (
+                    {p.tags.map((t) => (
                       <span className="tag" key={t}>
                         {t}
                       </span>
@@ -225,5 +239,5 @@ export default function Projects() {
         </div>
       </section>
     </>
-  )
+  );
 }
